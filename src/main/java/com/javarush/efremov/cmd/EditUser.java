@@ -1,8 +1,8 @@
-package com.javarush.khmelov.cmd;
+package com.javarush.efremov.cmd;
 
-import com.javarush.khmelov.entity.Role;
-import com.javarush.khmelov.entity.User;
-import com.javarush.khmelov.service.UserService;
+import com.javarush.efremov.entity.Role;
+import com.javarush.efremov.entity.User;
+import com.javarush.efremov.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.Optional;

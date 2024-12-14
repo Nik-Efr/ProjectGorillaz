@@ -1,7 +1,7 @@
-package com.javarush.khmelov.controller;
+package com.javarush.efremov.controller;
 
-import com.javarush.khmelov.cmd.Command;
-import com.javarush.khmelov.config.Winter;
+import com.javarush.efremov.cmd.Command;
+import com.javarush.efremov.config.Winter;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class HttpResolver {

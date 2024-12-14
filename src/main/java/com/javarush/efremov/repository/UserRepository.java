@@ -1,7 +1,7 @@
-package com.javarush.khmelov.repository;
+package com.javarush.efremov.repository;
 
-import com.javarush.khmelov.entity.Role;
-import com.javarush.khmelov.entity.User;
+import com.javarush.efremov.entity.Role;
+import com.javarush.efremov.entity.User;
 
 import java.util.Collection;
 import java.util.HashMap;

@@ -20,9 +20,6 @@ public class Quest implements Command {
         if (currentStep == null) {
             currentStep = "start";
             session.setAttribute("questStep", currentStep);
-        } else if (currentStep=="/"){
-            session.removeAttribute("questStep");
-            return "start-page";
         }
 
         String question = questService.getQuestion(currentStep);
@@ -41,6 +38,12 @@ public class Quest implements Command {
         String currentStep = (String) session.getAttribute("questStep");
 
         String nextStep = questService.getNextStep(currentStep, answer);
+
+        if (nextStep=="/"){
+            session.removeAttribute("questStep");
+            return "/";
+        }
+
         session.setAttribute("questStep", nextStep);
 
         return getView();

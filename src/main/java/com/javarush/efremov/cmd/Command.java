@@ -32,6 +32,6 @@ public interface Command {
                 ? snakeName.substring(1)
                 : snakeName;
     }
-    //test
+
 
 }

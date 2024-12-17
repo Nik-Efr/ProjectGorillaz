@@ -3,6 +3,8 @@ package com.javarush.efremov.controller;
 import com.javarush.efremov.cmd.Command;
 import com.javarush.efremov.config.Winter;
 import com.javarush.efremov.entity.Role;
+import com.javarush.efremov.util.Go;
+import com.javarush.efremov.util.Key;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,7 +14,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet({"", "/start-page", "/list-user", "/edit-user", "/quest"})
+
+@WebServlet({Go.INDEX, Go.LIST_USER,Go.EDIT_USER, Go.QUEST})
 public class FrontController extends HttpServlet {
 
     private final HttpResolver httpResolver = Winter.find(HttpResolver.class);
@@ -27,7 +30,7 @@ public class FrontController extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) {
-        config.getServletContext().setAttribute("roles", Role.values());
+        config.getServletContext().setAttribute(Key.ROLES, Role.values());
     }
 
     private static String getJsp(String view) {

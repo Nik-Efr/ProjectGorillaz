@@ -7,6 +7,7 @@ import com.javarush.efremov.util.Go;
 import com.javarush.efremov.util.Key;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import java.io.IOException;
 
 
 @WebServlet({Go.INDEX, Go.LIST_USER,Go.EDIT_USER, Go.QUEST})
+@MultipartConfig(fileSizeThreshold = 1 << 20)
 public class FrontController extends HttpServlet {
 
     private final HttpResolver httpResolver = Winter.find(HttpResolver.class);

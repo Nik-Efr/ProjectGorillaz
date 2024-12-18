@@ -2,52 +2,46 @@ package com.javarush.efremov.cmd;
 
 import com.javarush.efremov.entity.Role;
 import com.javarush.efremov.entity.User;
+import com.javarush.efremov.service.ImageService;
 import com.javarush.efremov.service.UserService;
-import com.javarush.efremov.util.Key;
 import jakarta.servlet.http.HttpServletRequest;
-
-import java.util.Optional;
+import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 
 
 @SuppressWarnings("unused")
+@AllArgsConstructor
 public class EditUser implements Command {
 
     private final UserService userService;
-
-    public EditUser(UserService userService) {
-        this.userService = userService;
-    }
-
+    private final ImageService imageService;
 
     @Override
     public String doGet(HttpServletRequest req) {
-        String stringId = req.getParameter(Key.ID);
+        String stringId = req.getParameter("id");
         if (stringId != null) {
             long id = Long.parseLong(stringId);
-            Optional<User> optionalUser = userService.get(id);
-            if (optionalUser.isPresent()) {
-                User user = optionalUser.get();
-                req.setAttribute(Key.USER, user);
-            }
+            userService.get(id)
+                    .ifPresent(user -> req.setAttribute("user", user));
         }
         return getView();
     }
 
     @Override
+    @SneakyThrows
     public String doPost(HttpServletRequest req) {
         User user = User.builder()
-                .login(req.getParameter(Key.LOGIN))
-                .password(req.getParameter(Key.PASSWORD))
-                .role(Role.valueOf(req.getParameter(Key.ROLE)))
+                .login(req.getParameter("login"))
+                .password(req.getParameter("password"))
+                .role(Role.valueOf(req.getParameter("role")))
                 .build();
         if (req.getParameter("create") != null) {
             userService.create(user);
         } else if (req.getParameter("update") != null) {
-            user.setId(Long.parseLong(req.getParameter(Key.ID)));
+            user.setId(Long.parseLong(req.getParameter("id")));
             userService.update(user);
         }
+        imageService.uploadImage(req, user.getImage());
         return getView() + "?id=" + user.getId();
     }
-
-
 }

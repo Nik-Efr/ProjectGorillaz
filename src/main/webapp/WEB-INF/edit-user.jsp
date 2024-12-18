@@ -2,13 +2,25 @@
 <%@include file="parts/header.jsp" %>
 <body>
 <div class="container">
-    <form class="form-horizontal" method="post">
+    <form class="form-horizontal" method="post" enctype="multipart/form-data">
         <fieldset>
 
-            <!-- Form Name -->
+
             <legend>Edit user:</legend>
 
-            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="image">
+                    <img id="previewId"
+                         src="images/${requestScope.user.image}"
+                         width="150"
+                         alt="${requestScope.user.image}">
+                    <input id="image"
+                           name="image"
+                           class="input-file" type="file"/>
+                </label>
+            </div>
+
+
             <div class="form-group">
                 <label class="col-md-4 control-label" for="login">Login</label>
                 <div class="col-md-4">
@@ -70,4 +82,5 @@
     </form>
 </div>
 <%@include file="parts/footer.jsp" %>
+
 

@@ -16,10 +16,10 @@ public class UserRepository implements Repository<User> {
     public static final AtomicLong id = new AtomicLong(System.currentTimeMillis());
 
     public UserRepository() {
-        map.put(1L, new User(1L, "Alisa", "qwerty", Role.USER));
-        map.put(2L, new User(2L, "Bob", "", Role.GUEST));
-        map.put(3L, new User(3L, "Carl", "admin", Role.ADMIN));
-        map.put(4L, new User(4L, "Khmelov", "admin", Role.ADMIN));
+        map.put(1L, new User(1L, "Avatar", "qwerty", Role.USER));
+        map.put(2L, new User(2L, "Cat", "12345", Role.GUEST));
+        map.put(3L, new User(3L, "Robz", "password", Role.USER));
+        map.put(4L, new User(4L, "Admin", "admin", Role.ADMIN));
     }
 
     @Override

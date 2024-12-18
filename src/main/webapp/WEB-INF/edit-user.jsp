@@ -1,86 +1,55 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@include file="parts/header.jsp" %>
-<body>
 <div class="container">
-    <form class="form-horizontal" method="post" enctype="multipart/form-data">
-        <fieldset>
+    <section class="position-relative py-4 py-xl-5">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-6 col-xl-4">
+                    <div class="card mb-5">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <h2>Edit User</h2>
+                            <form class="text-center" method="post" action="edit-user" enctype="multipart/form-data">
+                                <input type="hidden" name="id" value="${user.id}">
+                                <p class="text-muted">Нажмите для загрузки фото</p>
 
-
-            <legend>Edit user:</legend>
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="image">
-                    <img id="previewId"
-                         src="images/${requestScope.user.image}"
-                         width="150"
-                         alt="${requestScope.user.image}">
-                    <input id="image"
-                           name="image"
-                           class="input-file" type="file"/>
-                </label>
-            </div>
-
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="login">Login</label>
-                <div class="col-md-4">
-                    <input
-                            id="login"
-                            name="login"
-                            type="text"
-                            value="${requestScope.user.login}"
-                            placeholder="your login"
-                            class="form-control input-md"
-                            required="">
-                    <span class="help-block">min 3 symbols</span>
+                                <div class="form-group">
+                                    <label for="image">
+                                        <img id="previewId" src="images/${user.image}" width="250px"
+                                             alt="images/${user.image}">
+                                    </label>
+                                    <input onchange="PreviewImage('image','previewId');" id="image" name="image"
+                                           style="visibility:hidden;"
+                                           class="input-file" type="file">
+                                </div>
+                                <p class="w-lg-50">Укажите данные для обновления</p>
+                                <div class="mb-3"><input class="form-control" type="text" name="login" placeholder="Login" value="${requestScope.user.login}"></div>
+                                <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Password" value="${requestScope.user.password}"></div>
+                                <div class="mb-3">
+                                    <select class="form-control" name="role">
+                                        <option value="USER" ${requestScope.user.role == 'USER' ? 'selected' : ''}>User</option>
+                                        <option value="ADMIN" ${requestScope.user.role == 'ADMIN' ? 'selected' : ''}>Admin</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <button class="btn btn-primary d-block w-100" type="submit" name="update">Update</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <!-- Password input-->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="password">Password</label>
-                <div class="col-md-4">
-                    <input id="password"
-                           name="password"
-                           type="password"
-                           value="${requestScope.user.password}"
-                           placeholder="your password"
-                           class="form-control input-md"
-                           required="">
-                    <span class="help-block">min 8 symb</span>
-                </div>
-            </div>
-
-
-            <!-- Select Basic -->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="role">Role</label>
-                <div class="col-md-4">
-                    <select id="role" name="role" class="form-control">
-                        <c:forEach var="role" items="${applicationScope.roles}">
-                            <option value="${role}" ${role==requestScope.user.role?"selected":""}>${role}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Button (Double) -->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="create">Operation</label>
-                <div class="col-md-8">
-                    <c:if test="${requestScope.user==null}">
-                        <button id="create" name="create" class="btn btn-success">Create</button>
-                    </c:if>
-                    <c:if test="${requestScope.user!=null}">
-                        <button id="update" name="update" class="btn btn-primary">Update</button>
-                    </c:if>
-
-                </div>
-            </div>
-
-        </fieldset>
-    </form>
+        </div>
+    </section>
 </div>
+
+<script type="text/javascript">
+    function PreviewImage(inputFileId, imageId) {
+        let oFReader = new FileReader();
+        oFReader.readAsDataURL(document.getElementById(inputFileId).files[0]);
+        oFReader.onload = function (oFREvent) {
+            document.getElementById(imageId).src = oFREvent.target.result;
+        };
+    }
+</script>
+
 <%@include file="parts/footer.jsp" %>
-
-

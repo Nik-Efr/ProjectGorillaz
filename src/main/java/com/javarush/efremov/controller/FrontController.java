@@ -16,8 +16,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebServlet({Go.INDEX, Go.LIST_USER,Go.EDIT_USER, Go.QUEST})
 @MultipartConfig(fileSizeThreshold = 1 << 20)
+@WebServlet({
+        Go.INDEX, Go.HOME,
+        Go.SIGNUP, Go.LOGIN, Go.LOGOUT,
+        Go.LIST_USER, Go.PROFILE, Go.EDIT_USER,Go.QUEST
+})
 public class FrontController extends HttpServlet {
 
     private final HttpResolver httpResolver = Winter.find(HttpResolver.class);
@@ -40,7 +44,7 @@ public class FrontController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Command command = httpResolver.resolve(req);
         String redirect = command.doPost(req);
         resp.sendRedirect(redirect);

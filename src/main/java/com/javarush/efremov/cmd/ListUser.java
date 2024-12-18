@@ -4,17 +4,15 @@ import com.javarush.efremov.entity.User;
 import com.javarush.efremov.service.UserService;
 import com.javarush.efremov.util.Key;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.AllArgsConstructor;
 
 import java.util.Collection;
 
 @SuppressWarnings("unused")
+@AllArgsConstructor
 public class ListUser implements Command {
 
     private final UserService userService;
-
-    public ListUser(UserService userService) {
-        this.userService = userService;
-    }
 
     @Override
     public String doGet(HttpServletRequest request) {

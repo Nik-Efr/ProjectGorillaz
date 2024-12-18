@@ -16,6 +16,7 @@ public class Quest implements Command {
 
     @Override
     public String doGet(HttpServletRequest req) {
+        int id = Integer.parseInt(req.getParameter("id"));
         HttpSession session = req.getSession();
         String currentStep = (String) session.getAttribute(Key.QUEST_STEP);
 
@@ -24,9 +25,9 @@ public class Quest implements Command {
             session.setAttribute(Key.QUEST_STEP, currentStep);
         }
 
-        String question = questService.getQuestion(currentStep);
-        String[] options = questService.getOptions(currentStep);
-        String imageUrl = questService.getImageUrl(currentStep);
+        String question = questService.getQuestion(currentStep, id);
+        String[] options = questService.getOptions(currentStep, id);
+        String imageUrl = questService.getImageUrl(currentStep,id);
 
         req.setAttribute(Key.QUESTION, question);
         req.setAttribute(Key.OPTIONS, options);
@@ -37,21 +38,22 @@ public class Quest implements Command {
 
     @Override
     public String doPost(HttpServletRequest req) {
+        int id = Integer.parseInt(req.getParameter("id"));
         String answer = req.getParameter(Key.ANSWER);
         HttpSession session = req.getSession();
         String currentStep = (String) session.getAttribute(Key.QUEST_STEP);
 
-        String nextStep = questService.getNextStep(currentStep, answer);
+        String nextStep = questService.getNextStep(currentStep, answer, id);
 
-        if (nextStep=="/"){
+        if (nextStep == "/") {
             session.removeAttribute(Key.QUEST_STEP);
             return "/";
         }
 
         session.setAttribute(Key.QUEST_STEP, nextStep);
-        String imageUrl = questService.getImageUrl(nextStep);
+        String imageUrl = questService.getImageUrl(nextStep,id);
         req.setAttribute("imageUrl", imageUrl);
 
-        return getView();
+        return getView() + "?id=" + id;
     }
 }

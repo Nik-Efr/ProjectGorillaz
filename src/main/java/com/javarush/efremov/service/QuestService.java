@@ -29,28 +29,29 @@ public class QuestService {
         questSteps.put("door", new QuestStep("Дверь заперта. Что вы делаете?",
                 new String[]{"Сильно толкаю дверь", "Ищу ключ"},
                 Map.of("Сильно толкаю дверь", "lost4",
-                        "Ищу ключ", "unlockedDoor")));
+                        "Ищу ключ", "win")));
 
 
-        questSteps.put("unlockedDoor", new QuestStep("Вы нашли ключ и открыли дверь! Вы выходите в коридор и видите выход на улицу! Вы свободны!",
+        questSteps.put("win", new QuestStep("Вы нашли ключ и открыли дверь! Вы выходите в коридор и видите выход на улицу! Вы свободны!",
                 new String[]{"Начать заново", "Вернуться на главное меню"},
                 Map.of("Начать заново", Key.START,"Вернуться на главное меню","/")));
 
-        questSteps.put("lost3", new QuestStep("Вы выбрались через окно, но упали и получили травму. Игра окончена.",
+        questSteps.put("lost3", new QuestStep("Вы выбрались через окно, но упали и получили травму.",
                 new String[]{"Начать заново", "Вернуться на главное меню"},
                 Map.of("Начать заново", Key.START,"Вернуться на главное меню","/")));
 
-        questSteps.put("lost1", new QuestStep("Ваш крик никого не привлек, и вы остались в темноте. Игра окончена.",
+        questSteps.put("lost1", new QuestStep("Ваш крик никого не привлек, и вы остались в темноте.",
                 new String[]{"Начать заново", "Вернуться на главное меню"},
                 Map.of("Начать заново", Key.START,"Вернуться на главное меню","/")));
 
-        questSteps.put("lost2", new QuestStep("Вы не смогли найти выход из-за темноты. Игра окончена.",
+        questSteps.put("lost2", new QuestStep("Вы не смогли найти выход из-за темноты.",
                 new String[]{"Начать заново", "Вернуться на главное меню"},
                 Map.of("Начать заново", Key.START,"Вернуться на главное меню","/")));
 
-        questSteps.put("lost4", new QuestStep("Вы сломали дверь, пытаясь ее открыть. Теперь вы не можете выбраться. Игра окончена.",
+        questSteps.put("lost4", new QuestStep("Вы сломали дверь, пытаясь ее открыть. Теперь вы не можете выбраться.",
                 new String[]{"Начать заново", "Вернуться на главное меню"},
                 Map.of("Начать заново", Key.START,"Вернуться на главное меню","/")));
+
     }
 
 
@@ -76,6 +77,15 @@ public class QuestService {
             throw new IllegalArgumentException("Некорректный шаг квеста: " + currentStep);
         }
         return questStep.getNextSteps().get(answer);
+    }
+
+    public String getImageUrl(String step) {
+        if(step.contains("lost")){
+            return "images/lost";
+        }else if(step.contains("win")){
+            return "images/win";
+        }
+        return "images/" + step;
     }
 
     private static class QuestStep {

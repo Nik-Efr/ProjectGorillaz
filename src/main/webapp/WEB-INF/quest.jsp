@@ -4,6 +4,9 @@
 <body>
 <h1>Квест</h1>
 <p>${question}</p>
+<c:if test="${not empty imageUrl}">
+<img src="${imageUrl}" alt="Quest Image" class="img-fluid mb-3" style="width: 700px; height: auto;">
+</c:if>
 <form action="quest" method="post">
   <c:forEach items="${options}" var="option" varStatus="status">
     <input type="radio" name="answer" value="${option}" ${status.index == 0 ? 'checked' : ''}>${option}<br>

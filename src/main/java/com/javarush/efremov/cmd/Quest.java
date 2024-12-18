@@ -26,9 +26,11 @@ public class Quest implements Command {
 
         String question = questService.getQuestion(currentStep);
         String[] options = questService.getOptions(currentStep);
+        String imageUrl = questService.getImageUrl(currentStep);
 
         req.setAttribute(Key.QUESTION, question);
         req.setAttribute(Key.OPTIONS, options);
+        req.setAttribute("imageUrl", imageUrl);
 
         return getView();
     }
@@ -47,6 +49,8 @@ public class Quest implements Command {
         }
 
         session.setAttribute(Key.QUEST_STEP, nextStep);
+        String imageUrl = questService.getImageUrl(nextStep);
+        req.setAttribute("imageUrl", imageUrl);
 
         return getView();
     }

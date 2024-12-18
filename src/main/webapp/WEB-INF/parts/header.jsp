@@ -24,7 +24,6 @@
           <li class="nav-item"><a class="nav-link active" href="http://localhost:8080/">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="http://localhost:8080/statistics">Статистика</a></li>
           <li class="nav-item"><a class="nav-link" href="http://localhost:8080/list-user">Пользователи</a></li>
-          <li class="nav-item"><a class="nav-link" href="http://localhost:8080/create-quest">Создать квест</a></li>
         </ul><a class="btn btn-primary ms-md-2" role="button" href="#">Login</a><a class="btn btn-primary ms-md-2" role="button" href="#">Signup</a>
       </div>
     </div>

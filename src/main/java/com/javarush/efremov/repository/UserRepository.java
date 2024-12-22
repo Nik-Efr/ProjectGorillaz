@@ -2,11 +2,9 @@ package com.javarush.efremov.repository;
 
 import com.javarush.efremov.entity.Role;
 import com.javarush.efremov.entity.User;
+import com.javarush.efremov.entity.UserStatistics;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Stream;
 
@@ -16,11 +14,22 @@ public class UserRepository implements Repository<User> {
 
     public static final AtomicLong id = new AtomicLong(System.currentTimeMillis());
 
+    private final List<UserStatistics> userStatistics = new ArrayList<>();
+
     public UserRepository() {
         map.put(1L, new User(1L, "Avatar", "qwerty", Role.USER));
         map.put(2L, new User(2L, "Cat", "12345", Role.USER));
         map.put(3L, new User(3L, "Robz", "password", Role.USER));
         map.put(4L, new User(4L, "Admin", "admin", Role.ADMIN));
+
+        userStatistics.add(new UserStatistics(1L, "Avatar", 0, 0));
+        userStatistics.add(new UserStatistics(2L, "Cat", 0, 0));
+        userStatistics.add(new UserStatistics(3L, "Robz", 0, 0));
+        userStatistics.add(new UserStatistics(4L, "Admin", 0, 0));
+    }
+
+    public List<UserStatistics> getAllUserStatistics(){
+        return userStatistics;
     }
 
     @Override

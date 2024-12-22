@@ -1,17 +1,24 @@
 package com.javarush.efremov.cmd;
 
+import com.javarush.efremov.entity.User;
+import com.javarush.efremov.entity.UserStatistics;
+import com.javarush.efremov.repository.UserRepository;
 import com.javarush.efremov.service.QuestService;
-import com.javarush.efremov.util.Go;
+import com.javarush.efremov.service.UserService;
 import com.javarush.efremov.util.Key;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+import java.util.List;
+
 public class Quest implements Command {
 
     private final QuestService questService;
+    private final UserService userService;
 
-    public Quest(QuestService questService) {
+    public Quest(QuestService questService, UserService userService) {
         this.questService = questService;
+        this.userService = userService;
     }
 
     @Override
@@ -48,6 +55,9 @@ public class Quest implements Command {
         if (nextStep == "/") {
             session.removeAttribute(Key.QUEST_STEP);
             return "/";
+        }else if(session.getAttribute("user")!=null){
+            User user = (User) session.getAttribute("user");
+            userService.updateUserStatistics(user,nextStep);
         }
 
         session.setAttribute(Key.QUEST_STEP, nextStep);

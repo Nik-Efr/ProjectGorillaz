@@ -2,6 +2,8 @@ package com.javarush.efremov.cmd;
 
 import com.javarush.efremov.entity.Role;
 import com.javarush.efremov.entity.User;
+import com.javarush.efremov.entity.UserStatistics;
+import com.javarush.efremov.repository.UserRepository;
 import com.javarush.efremov.service.ImageService;
 import com.javarush.efremov.service.UserService;
 import com.javarush.efremov.util.Key;
@@ -9,6 +11,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
+
+import java.util.List;
 
 
 @SuppressWarnings("unused")
@@ -40,6 +44,7 @@ public class EditUser implements Command {
                 .role(Role.valueOf(req.getParameter(Key.ROLE)))
                 .build();
         userService.update(user);
+        userService.updateUserStatistics(user);
         HttpSession session = req.getSession();
         session.setAttribute(Key.USER, user);
         imageService.uploadImage(req, user.getImage());

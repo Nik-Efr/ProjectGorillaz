@@ -20,7 +20,7 @@ import java.io.IOException;
 @WebServlet({
         Go.INDEX, Go.HOME,
         Go.SIGNUP, Go.LOGIN, Go.LOGOUT,
-        Go.LIST_USER, Go.PROFILE, Go.EDIT_USER,Go.QUEST
+        Go.LIST_USER, Go.PROFILE, Go.EDIT_USER,Go.QUEST,Go.STATISTICS
 })
 public class FrontController extends HttpServlet {
 

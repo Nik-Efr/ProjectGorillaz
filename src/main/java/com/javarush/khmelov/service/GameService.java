@@ -1,7 +1,7 @@
 package com.javarush.khmelov.service;
 
 import com.javarush.khmelov.entity.*;
-import com.javarush.khmelov.repository.*;
+import com.javarush.khmelov.repository.Repository;
 import lombok.AllArgsConstructor;
 
 import java.util.Comparator;
@@ -10,11 +10,11 @@ import java.util.Optional;
 @AllArgsConstructor
 public class GameService {
 
-    private final UserRepository userRepository;
-    private final GameRepository gameRepository;
-    private final QuestRepository questRepository;
-    private final QuestionRepository questionRepository;
-    private final AnswerRepository answerRepository;
+    private final Repository<User> userRepository;
+    private final Repository<Game> gameRepository;
+    private final Repository<Quest> questRepository;
+    private final Repository<Question> questionRepository;
+    private final Repository<Answer> answerRepository;
 
     public Optional<Game> getGame(Long questId, Long userId) {
         Game gamePattern = Game.builder().questId(questId).build();

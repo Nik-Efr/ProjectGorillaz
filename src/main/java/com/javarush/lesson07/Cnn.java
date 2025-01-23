@@ -18,7 +18,7 @@ public class Cnn {
         }
     }
 
-    public Connection get() throws SQLException {
+    public static Connection get() throws SQLException {
         return DriverManager.getConnection(
                 Configuration.getProperty(DB_URI_KEY),
                 Configuration.getProperty(DB_USER),

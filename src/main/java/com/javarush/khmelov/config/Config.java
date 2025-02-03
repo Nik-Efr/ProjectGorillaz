@@ -12,16 +12,12 @@ public class Config {
     private final UserService userService;
 
     private final QuestService questService;
+    private final LiqubaseInit liqubaseInit;
 
     public void fillEmptyRepository() {
-        if (userService.get(1L).isEmpty()) {
-            User admin = biuldUser("Carl", "admin", Role.ADMIN);
-            userService.create(admin);
-            User alisa = biuldUser("Alisa", "qwerty", Role.USER);
-            userService.create(alisa);
-            User bob = biuldUser("Bob", "123", Role.GUEST);
-            userService.create(bob);
-
+        liqubaseInit.init();
+        if (questService.getAll().isEmpty()) {
+            User admin = userService.get(1L).orElseThrow();
             addDemoQuests(admin);
         }
     }

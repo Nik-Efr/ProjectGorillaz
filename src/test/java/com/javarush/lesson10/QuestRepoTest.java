@@ -1,7 +1,7 @@
 package com.javarush.lesson10;
 
 import com.javarush.khmelov.entity.Quest;
-import com.javarush.lesson09.SessionCreator;
+import com.javarush.khmelov.config.SessionCreator;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -32,11 +32,11 @@ class QuestRepoTest {
 
     @Test
     void getQueryWithParam() {
-        Transaction tx = session.beginTransaction();
-        Query<Quest> questQuery = session.createNamedQuery(Quest.ID_MORE, Quest.class);
-        questQuery.setParameter("id", 1);
-        questQuery.list().forEach(System.out::println);
-        tx.rollback();
+//        Transaction tx = session.beginTransaction();
+//        Query<Quest> questQuery = session.createNamedQuery(Quest.ID_MORE, Quest.class);
+//        questQuery.setParameter("id", 1);
+//        questQuery.list().forEach(System.out::println);
+//        tx.rollback();
     }
 
     @Test

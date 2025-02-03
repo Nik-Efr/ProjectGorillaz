@@ -1,10 +1,11 @@
-package com.javarush.lesson09;
+package com.javarush.khmelov.config;
 
-import com.javarush.khmelov.entity.User;
+import com.javarush.khmelov.entity.*;
 import lombok.SneakyThrows;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy;
 import org.hibernate.cfg.Configuration;
 
 
@@ -21,6 +22,11 @@ public class SessionCreator implements AutoCloseable {
         // configuration.addProperties(properties);               //3.3 application.properties
         // configuration.add????Resource()                        //and 100500 other ways
         configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(Quest.class);
+        configuration.addAnnotatedClass(Question.class);
+        configuration.addAnnotatedClass(Answer.class);
+        configuration.addAnnotatedClass(Game.class);
+        configuration.setPhysicalNamingStrategy(new CamelCaseToUnderscoresNamingStrategy());
         sessionFactory = configuration.buildSessionFactory();
     }
 

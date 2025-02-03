@@ -65,6 +65,7 @@ public class QuestService {
         Long startKey = findStartQuestionLabel(text);
         Long startId = map.get(startKey).getId();
         quest.setStartQuestionId(startId);
+        questRepository.update(quest); //TODO remove after full hibernate
 
         updateLinksAndId(map, quest);
         map.values().stream()

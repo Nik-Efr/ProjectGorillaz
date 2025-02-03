@@ -3,7 +3,7 @@ package com.javarush.lesson10;
 import com.javarush.khmelov.entity.User;
 import com.javarush.khmelov.exception.AppException;
 import com.javarush.khmelov.repository.Repository;
-import com.javarush.lesson09.SessionCreator;
+import com.javarush.khmelov.config.SessionCreator;
 import jakarta.persistence.Transient;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
@@ -13,7 +13,6 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.hibernate.query.criteria.HibernateCriteriaBuilder;
 import org.hibernate.query.criteria.JpaCriteriaQuery;
-import org.hibernate.query.criteria.JpaPredicate;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

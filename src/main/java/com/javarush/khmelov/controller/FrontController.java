@@ -3,6 +3,7 @@ package com.javarush.khmelov.controller;
 import com.javarush.khmelov.cmd.Command;
 import com.javarush.khmelov.config.Config;
 import com.javarush.khmelov.config.NanoSpring;
+import com.javarush.khmelov.config.SessionCreator;
 import com.javarush.khmelov.entity.Role;
 import com.javarush.khmelov.exception.AppException;
 import com.javarush.khmelov.util.Go;
@@ -65,5 +66,10 @@ public class FrontController extends HttpServlet {
 
     private static String getJsp(String view) {
         return "/WEB-INF/" + view + ".jsp";
+    }
+
+    @Override
+    public void destroy() {
+        NanoSpring.find(SessionCreator.class).close();
     }
 }

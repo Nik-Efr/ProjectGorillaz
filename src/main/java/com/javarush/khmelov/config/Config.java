@@ -10,7 +10,6 @@ import lombok.AllArgsConstructor;
 public class Config {
 
     private final UserService userService;
-
     private final QuestService questService;
     private final LiqubaseInit liqubaseInit;
 

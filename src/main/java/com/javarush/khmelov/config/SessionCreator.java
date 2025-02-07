@@ -1,12 +1,11 @@
 package com.javarush.khmelov.config;
 
 import com.javarush.khmelov.entity.*;
-import com.javarush.lesson12.hibernate.PasswordConverter;
+import com.javarush.lesson12.hibernate.PasswordType;
 import com.javarush.lesson12.hibernate.Person;
 import lombok.SneakyThrows;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy;
 import org.hibernate.cfg.Configuration;
 

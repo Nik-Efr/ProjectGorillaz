@@ -1,16 +1,10 @@
 package com.javarush.lesson12.hibernate;
 
 import com.javarush.khmelov.entity.AbstractEntity;
-import com.javarush.khmelov.entity.Game;
-import com.javarush.khmelov.entity.Quest;
 import com.javarush.khmelov.entity.Role;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.Hibernate;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Objects;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Getter
@@ -26,8 +20,11 @@ public class Person implements AbstractEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Embedded
-    AuthData authData;
+    String login;
+
+    ///@Convert(converter = PasswordConverter.class)
+    @Type(PasswordType.class)
+    Password password;
 
     @Enumerated(EnumType.STRING)
     private Role role;

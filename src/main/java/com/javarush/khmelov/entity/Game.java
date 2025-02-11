@@ -14,6 +14,7 @@ public class Game implements AbstractEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "quest_id")
     private Long questId;
 
     @Column(name = "users_id")

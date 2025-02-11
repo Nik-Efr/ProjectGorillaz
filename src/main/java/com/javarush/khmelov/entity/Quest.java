@@ -12,6 +12,7 @@ import java.util.Collection;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = {"questions", "author", "users", "text"})
 public class Quest implements AbstractEntity {
 
     @Id
@@ -22,12 +23,24 @@ public class Quest implements AbstractEntity {
 
     private String text;
 
-    @Column(name = "users_id")
-    private Long authorId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "users_id")
+    private User author;
 
     private Long startQuestionId;
 
-    @Transient
+    @OneToMany(mappedBy = "questId")
     private final Collection<Question> questions = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "game",
+            inverseJoinColumns = @JoinColumn(
+                    name = "quest_id",
+                    referencedColumnName = "id"),
+            joinColumns = @JoinColumn(name = "users_id",
+                    referencedColumnName = "id")
+    )
+    private Collection<User> users;
 
 }

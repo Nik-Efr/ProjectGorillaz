@@ -46,14 +46,14 @@ public class QuestService {
         if (map.isEmpty()) {
             return Optional.empty();
         }
+        User user = userRepository.get(userId);
         Quest quest = Quest.builder()
-                .authorId(userId)
+                .author(user)
                 .name(name)
                 .text(text)
                 .startQuestionId(0L)
                 .build();
         questRepository.create(quest);
-        User user = userRepository.get(userId);
         Collection<Quest> quests = user.getQuests();
         quests.add(quest);
         questRepository.update(quest);

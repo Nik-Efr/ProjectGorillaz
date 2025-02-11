@@ -25,6 +25,7 @@ public class SessionCreator implements AutoCloseable {
         configuration.addProperties(properties);               //3.3 application.properties
         // configuration.add????Resource()                        //and 100500 other ways
         configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(UserInfo.class);
         configuration.addAnnotatedClass(Person.class); //todo delete it
         configuration.addAnnotatedClass(Quest.class);
         configuration.addAnnotatedClass(Question.class);

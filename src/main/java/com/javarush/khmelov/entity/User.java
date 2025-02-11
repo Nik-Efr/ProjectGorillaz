@@ -29,11 +29,37 @@ public class User implements AbstractEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Transient
+    @OneToOne(mappedBy = "user")
+    UserInfo userInfo;
+
+    @OneToMany(mappedBy = "author")
     private final Collection<Quest> quests = new ArrayList<>();
 
-    @Transient
+    @ManyToMany
+    @JoinTable(
+            name = "game",
+            joinColumns = @JoinColumn(
+            name = "quest_id",
+            referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "users_id",
+                    referencedColumnName = "id")
+    )
+    Collection<Quest> questsInGame = new ArrayList<>();
+
+
+    public void addQuest(Quest quest) {
+        quest.setAuthor(this);
+        quests.add(quest);
+    }
+
+    @OneToMany
+    @JoinColumn(name = "users_id")
     private final Collection<Game> games = new ArrayList<>();
+
+    public void addGames(Game game) {
+        game.setUserId(this.getId());
+        games.add(game);
+    }
 
     public String getImage() { //TODO move to DTO
         return "user-" + id;

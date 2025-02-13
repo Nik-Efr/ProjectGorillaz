@@ -19,6 +19,7 @@ public class Question implements AbstractEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "quest_id")
     private Long questId;
 
     private String text;

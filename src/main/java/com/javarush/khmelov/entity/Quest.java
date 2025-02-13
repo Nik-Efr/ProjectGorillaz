@@ -27,6 +27,7 @@ public class Quest implements AbstractEntity {
     @JoinColumn(name = "users_id")
     private User author;
 
+    @Column(name = "start_question_id")
     private Long startQuestionId;
 
     @OneToMany(mappedBy = "questId")

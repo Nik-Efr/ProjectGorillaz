@@ -3,6 +3,8 @@ package com.javarush.khmelov.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,7 +17,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
-@ToString(exclude = {"quests", "games"})
+@ToString(exclude = {"quests", "games", "questsInGame"})
 public class User implements AbstractEntity {
 
     @Id

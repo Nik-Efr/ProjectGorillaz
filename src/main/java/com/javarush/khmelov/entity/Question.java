@@ -2,6 +2,9 @@ package com.javarush.khmelov.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,6 +32,7 @@ public class Question implements AbstractEntity {
 
     @OneToMany(mappedBy = "questionId")
 
+    //@Fetch(value = FetchMode.SUBSELECT)
     private final Collection<Answer> answers = new ArrayList<>();
 
     public String getImage() {

@@ -2,9 +2,8 @@ package com.javarush.khmelov.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.Cache;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,6 +15,11 @@ import java.util.Collection;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = "answers")
+@Cacheable
+@Cache(
+        usage = CacheConcurrencyStrategy.READ_ONLY,
+        region = "MyQuestion"
+)
 public class Question implements AbstractEntity {
 
     @Id

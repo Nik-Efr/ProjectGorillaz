@@ -51,7 +51,7 @@ enum CacheDemoSessionFactory {
                 .setProperty("hibernate.javax.cache.provider", "org.ehcache.jsr107.EhcacheCachingProvider")
                 .setProperty("hibernate.cache.use_second_level_cache", "true")
                 .setProperty("hibernate.javax.cache.missing_cache_strategy", "fail")
-                .setProperty("hibernate.cache.use_query_cache", "true")
+                //.setProperty("hibernate.cache.use_query_cache", "true")
                 .setProperty("hibernate.generate_statistics", "false");
         ;
         //.configure(); //skip hibernate.cfg.xml

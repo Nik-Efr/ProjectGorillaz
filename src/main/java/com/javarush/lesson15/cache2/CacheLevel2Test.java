@@ -1,6 +1,6 @@
 package com.javarush.lesson15.cache2;
 
-import com.javarush.khmelov.entity.*;
+import com.javarush.khmelov.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.jupiter.api.AfterEach;
@@ -27,7 +27,7 @@ public class CacheLevel2Test {
 
     @AfterEach
     public void after() {
-        CacheDemoSessionFactory.SESSION.closeFactory();
+        //CacheDemoSessionFactory.SESSION.closeFactory();
     }
 
 

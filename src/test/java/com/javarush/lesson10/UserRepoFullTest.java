@@ -1,5 +1,6 @@
 package com.javarush.lesson10;
 
+import com.javarush.khmelov.config.NanoSpring;
 import com.javarush.khmelov.entity.Role;
 import com.javarush.khmelov.entity.User;
 import com.javarush.khmelov.config.SessionCreator;
@@ -51,7 +52,7 @@ class UserRepoFullTest {
 
     @BeforeEach
     void setUp() {
-        sessionCreator = new SessionCreator();
+        sessionCreator = NanoSpring.find(SessionCreator.class);;
         userRepo = new UserRepoFull(sessionCreator);
     }
 

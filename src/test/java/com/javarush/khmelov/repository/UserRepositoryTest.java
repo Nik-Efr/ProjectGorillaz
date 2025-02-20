@@ -1,5 +1,6 @@
 package com.javarush.khmelov.repository;
 
+import com.javarush.khmelov.config.ApplicationProperties;
 import com.javarush.khmelov.entity.Role;
 import com.javarush.khmelov.entity.User;
 import com.javarush.khmelov.config.SessionCreator;
@@ -10,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 class UserRepositoryTest {
 
-    private final SessionCreator sessionCreator=new SessionCreator();
+    private final SessionCreator sessionCreator=new SessionCreator(new ApplicationProperties());
     private final UserRepository userRepository = new UserRepository(sessionCreator);
     private User admin;
 

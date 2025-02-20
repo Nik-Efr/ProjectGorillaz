@@ -1,5 +1,6 @@
 package com.javarush.lesson10;
 
+import com.javarush.khmelov.config.NanoSpring;
 import com.javarush.khmelov.entity.Quest;
 import com.javarush.khmelov.config.SessionCreator;
 import org.hibernate.Session;
@@ -19,7 +20,7 @@ class QuestRepoTest {
 
     @BeforeEach
     void setUp() {
-        sessionCreator = new SessionCreator();
+        sessionCreator = NanoSpring.find(SessionCreator.class);;
         session = sessionCreator.getSession();
         questRepo = new QuestRepo(sessionCreator);
     }

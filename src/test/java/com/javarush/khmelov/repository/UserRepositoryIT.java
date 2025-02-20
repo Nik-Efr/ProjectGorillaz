@@ -1,28 +1,21 @@
 package com.javarush.khmelov.repository;
 
-import com.javarush.khmelov.config.ApplicationProperties;
-import com.javarush.khmelov.entity.Role;
+import com.javarush.khmelov.ContainerIT;
+import com.javarush.khmelov.config.NanoSpring;
 import com.javarush.khmelov.entity.User;
-import com.javarush.khmelov.config.SessionCreator;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class UserRepositoryTest {
 
-    private final SessionCreator sessionCreator=new SessionCreator(new ApplicationProperties());
-    private final UserRepository userRepository = new UserRepository(sessionCreator);
+class UserRepositoryIT extends ContainerIT {
+
+    private final UserRepository userRepository = NanoSpring.find(UserRepository.class);
     private User admin;
 
     @BeforeEach
     void createAdmin() {
-        admin = User.builder()
-                .login("testAdmin")
-                .password("testPassword")
-                .role(Role.ADMIN)
-                .build();
-        userRepository.create(admin);
+        admin = userRepository.get(1L);
     }
 
     @Test
@@ -34,21 +27,17 @@ class UserRepositoryTest {
 
     @Test
     void find() {
-        User pattern = User.builder().login("testAdmin").build();
+        User pattern = User.builder().login("Carl").build();
         var userStream = userRepository.find(pattern);
         Assertions.assertEquals(admin, userStream.findFirst().orElseThrow());
     }
 
     @Test
-    void update(){
+    void update() {
         admin.setLogin("newLogin");
         userRepository.update(admin);
         User user = userRepository.get(admin.getId());
         Assertions.assertEquals(admin, user);
     }
 
-    @AfterEach
-    void delete(){
-        userRepository.delete(admin);
-    }
 }
